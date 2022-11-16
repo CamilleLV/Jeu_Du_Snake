@@ -6,64 +6,61 @@ const defaultMap = {
     "dimensions": [80, 40],
     "delay": 200,
     "foodNumber": 2,
+    "snake": [
+        [60,60],
+        [60,59],
+        [60,58],
+    ]
 }
 
-class SnakeMap {
-    
-    constructor(mapTempate) {
-        // Taille de la map
-        this.nbWSquare = mapTempate[dimensions][0];
-        this.nbHSquare = mapTempate[dimensions][1];
+var toucheEnfonce = null;
 
-        // Création de la grille de la map
-        this.mapList = [];
-        for (var i=0; i<this.nbHSquare; i++) {
-            this.mapList.push(Array(this.nbWSquare));
-        }
 
-        // Gestion de la nouriture
-        this.foodNumber = mapTempate[foodNumber];
-        this.foodPlaces = [];
-        for (var i=0; i<this.foodNumber; i++) {
-            this.foodPlaces.push([
-                Math.floor(Math.random() * this.nbWSquare), 
-                Math.floor(Math.random() * this.nbHSquare)
-            ]);
-        }
+document.onkeydown = keyMooves;
 
+function keyMooves(e) {
+    e = e || window.event;
+
+    if (e.key === 'ArrowUp') { // Si flèche du Haut
+        toucheEnfonce = 0;
+    } else if (e.key === 'ArrowDown') { // Si flèche du bas
+        toucheEnfonce = 1;
+    } else if (e.key === 'ArrowLeft') { // Si flèche à gauche 
+        toucheEnfonce = 2;
+    } else if (e.key === 'ArrowRight') { // Si flèche à droite 
+        toucheEnfonce = 3;
     }
-
-    getMapList() {
-        return this.mapList;
-    }
-
-    getNbWSquare() {
-        return this.nbWSquare;
-    }
-
-    getNbHSquare() {
-        return this.nbHSquare;
-    }
-
 }
 
-class Snake {
 
-    constructor() {
-        this.snakePosition = [];
-        this.snakeVelocityW = 0;
-        this.snakeVelocityH = 0;
-    }
-
-    getHeadPosition() {
-        return this.snakePosition[0]
-    }
-
+function draw(map) {
 
 }
 
 
-function playGame() {
+function step() {
+
+}
+
+
+function playGame(mapTemplate) {
+    // Définition des dimensions de la map
+    var nbWSquare = mapTemplate["dimensions"][0];
+    var nbHSquare = mapTemplate["dimensions"][1];
+
+    // Dé
+    var mapList = [];
+    for (var i=0; i<nbHSquare; i++) {
+        mapList.push(Array(nbWSquare));
+    }
+
+    var foodNumber = mapTemplate["foodNumber"][1];
+
+    snake = mapTemplate["snake"];
+    snakeVelocityW = 0;
+    snakeVelocityH = 0;
+
+
 
 }
 
@@ -71,9 +68,7 @@ function playGame() {
 function main() {
     console.log("Ca marche");
 
-    var test = new SnakeMap(5, 5, null);
-    console.log(test.getMapList());
-    test.mapConsolePrint();
+    playGame(defaultMap);
 }
 
 main();
