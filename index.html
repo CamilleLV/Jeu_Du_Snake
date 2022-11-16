@@ -1,16 +1,56 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
-    <title>Jeu du SNAKE</title>
+    <title>Jeu du Serpent</title>
     <link rel="stylesheet" href="./assets/style/global.css">
 </head>
+
 <body>
-    
+    <header>
+        <div id="logoGame">
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500.000000 500.000000"
+                preserveAspectRatio="xMidYMid meet">
+                <g transform="translate(0.000000,500.000000) scale(0.100000,-0.100000)" stroke="none">
+                    <path
+                        d="M2780 4990 c-8 -4 -31 -14 -50 -21 -52 -20 -160 -134 -194 -204 -15 -33 -32 -67 -36 -76 -5 -9 -20 -63 -34 -121 -36 -146 -36 -285 -1 -418 14 -52 30 -99 35 -104 6 -6 10 -16 10 -22 0 -7 23 -49 51 -93 l52 -81 -5 -103 c-8 -149 -51 -224 -157 -274 -55 -26 -61 -27 -321 -33 -202 -5 -279 -11 -325 -24 -208 -58 -399 -217 -487 -406 -39 -82 -78 -243 -78 -318 0 -73 41 -261 62 -286 4 -6 8 -16 8 -22 0 -16 68 -131 100 -169 94 -111 190 -181 320 -233 128 -50 146 -52 747 -52 398 0 570 -3 590 -11 75 -31 90 -40 120 -71 107 -112 111 -281 9 -382 -80 -80 -105 -86 -358 -86 -238 0 -324 -10 -434 -51 -183 -69 -326 -198 -413 -373 -72 -144 -81 -200 -81 -480 0 -158 4 -255 11 -273 6 -15 16 -39 22 -53 16 -36 108 -130 129 -130 9 0 20 -4 23 -10 11 -18 92 -11 135 13 49 25 115 96 137 147 12 27 17 90 22 280 7 230 8 248 30 290 30 56 82 107 135 131 35 16 68 19 241 19 187 1 350 15 420 38 233 74 417 249 493 467 25 74 52 204 52 255 0 44 -26 192 -42 235 -84 236 -265 417 -483 485 -22 7 -51 17 -65 23 -17 8 -232 13 -635 17 -683 6 -631 0 -719 80 -137 125 -104 353 64 441 43 22 58 24 305 30 143 4 271 10 285 14 14 3 45 11 70 17 145 36 310 152 411 288 30 41 93 169 107 220 25 88 32 138 32 244 l0 114 43 63 c54 81 76 128 102 219 21 74 30 258 16 350 -31 220 -148 423 -274 475 -23 9 -50 21 -59 26 -22 11 -118 11 -138 -1z" />
+                </g>
+            </svg>
+        </div>
+        <div id="themeMap">
+            <span>Thème</span>
+            <select id="selectMapTheme">
+                <option>Noir et Blanc</option>
+                <option>Futuriste</option>
+                <option>Rétro</option>
+            </select>
+        </div>
+        <div id="gameMode">
+            <span>Mode de Jeu</span>
+            <select id="selectMode">
+                <option>Facile</option>
+                <option>Moyen</option>
+                <option>Difficile</option>
+                <option>Hardcore</option>
+            </select>
+        </div>
+        <button id="buttonFullScreen" >Plein Ecran</button>
+    </header>
+    <div id="dialogMenu">
+    </div>
     <div id="mapSection">
         <canvas id="snakeMap"></canvas>
     </div>
-    
-    <script src="./scripts/main.js"></script>
+    <footer>
+        <div id="snakeSize">
+            <span>Taille du Serpent : </span>
+        </div>
+        <div id="highScore">
+            <span>Hightscore : </span>
+        </div>
+    </footer>
+    <script src="./scripts/cam.js"></script>
 </body>
+
 </html>
