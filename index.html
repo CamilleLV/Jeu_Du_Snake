@@ -35,12 +35,20 @@
                 <option>Hardcore</option>
             </select>
         </div>
-        <button id="buttonFullScreen" >Plein Ecran</button>
+        <button id="buttonFullScreen">Plein Ecran</button>
     </header>
     <div id="dialogMenu">
     </div>
     <div id="mapSection">
-        <canvas id="snakeMap"></canvas>
+        <canvas id="snakeMap">
+            <img id="snakeHead"
+                src="./assets/images/snakeHead.png"
+                style="display: none ;">
+                
+            <img id="apple"
+                src="./assets/images/apple.png"
+                style="display: none ;">
+        </canvas>
     </div>
     <footer>
         <div id="snakeSize">
@@ -50,7 +58,7 @@
             <span>Hightscore : </span>
         </div>
     </footer>
-    <script src="./scripts/cam.js"></script>
+    <script src="./scripts/main.js"></script>
 </body>
 
 </html>
