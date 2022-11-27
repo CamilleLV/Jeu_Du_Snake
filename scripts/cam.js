@@ -8,6 +8,10 @@ function main() {
     var delay = mapInfo.delay;
     var posApple = mapInfo.food;*/
 
+    function draw(map) {
+        
+    }
+
     document.onkeydown = keyMooves;
 
 
@@ -38,13 +42,16 @@ function main() {
         return keyInfo;
     }
 
+    
     function step() {
 
-        var directionSnake = keyMooves;
+        var toucheEnfoncee = keyMooves;
 
     }
 
     setInterval(step, 500); /*Le second paramètre devra être delay*/
+
+    
 }
 
 main();
