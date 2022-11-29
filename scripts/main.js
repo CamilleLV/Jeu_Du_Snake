@@ -6,7 +6,7 @@ const ctxMap = cnvMap.getContext("2d");
 const defaultMap = {
     "dimensions": [30, 15],
     "delay": 200,
-    "foodNumber": 15,
+    "foodNumber": 5,
     "snake": [
         [15,5],
         [15,6],
@@ -14,6 +14,9 @@ const defaultMap = {
     ]
 }
 const foodLenghAdd = 3;
+const divParentCnv = document.getElementById("mapSection");
+const spanScore = document.getElementById("score");
+const spanHighScore = document.getElementById("highScore");
 
 
 
@@ -24,9 +27,14 @@ var snake = [];
 var mapList = [];
 var gameOver = false;
 var stepTime = 300;
+var foodNumber = 1;
+
+var imgHeadSnake = document.getElementById("snakeHead");
+var imgFood = document.getElementById("apple");
 
 
 
+/* ################# FONCTIONS ################# */
 function keyMooves(e) {
     e = e || window.event;
 
@@ -53,12 +61,22 @@ function randint(min, max) {
 
 function draw() {
     console.log("Début de la fonction draw");
-
-    // Initialisation des datas pour l'affichage
+    
+    // Nombre de lignes et de colonnes
     var nbLigne = mapList.length;
     var nbColonne = mapList[0].length;
-    var squareWidth = 25;
 
+    // Calcul de la taille des pixels 
+    var widthDiv = divParentCnv.clientWidth - 50;
+    var heightDiv = divParentCnv.clientHeight - 50;
+
+    if (Math.floor(widthDiv/nbColonne) >= Math.floor(heightDiv/nbLigne)) {
+        var squareWidth = Math.floor(heightDiv/nbLigne);
+    } else {
+        var squareWidth = Math.floor(widthDiv/nbColonne);
+    }
+
+    // Définition des informations du canva.
     cnvMap.style.width = nbColonne * squareWidth + "px";
     cnvMap.style.height = nbLigne * squareWidth + "px";
     cnvMap.width = nbColonne * squareWidth;
@@ -78,14 +96,14 @@ function draw() {
                 ctxMap.fillStyle = 'purple';
                 ctxMap.fillRect(j*squareWidth, i*squareWidth, squareWidth, squareWidth);
 
-                //ctxMap.drawImage(imageSnakeHead, j*squareWidth, i*squareWidth, squareWidth, squareWidth);
+                ctxMap.drawImage(imgHeadSnake, j*squareWidth, i*squareWidth, squareWidth, squareWidth);
             }
             if (mapList[i][j] == 'FOOD') {
                 console.log(i, j, "FOOD");
                 ctxMap.fillStyle = 'red';
-                ctxMap.fillRect(j*squareWidth, i*squareWidth, squareWidth, squareWidth);
+                //ctxMap.fillRect(j*squareWidth, i*squareWidth, squareWidth, squareWidth);
                 
-                //ctxMap.drawImage(imageApple, j*squareWidth, i*squareWidth, squareWidth, squareWidth);
+                ctxMap.drawImage(imgFood, j*squareWidth, i*squareWidth, squareWidth, squareWidth);
 
             }
         }
@@ -95,19 +113,33 @@ function draw() {
 }
 
 function updateScore() {
-
+    spanScore.textContent = score;
+    try {
+        var highScore = window.localStorage.getItem('highScore');
+        spanHighScore.textContent = highScore;
+    } catch (e) {
+        var highScore = 0;
+        window.localStorage.setItem('highScore', 0);
+    }
+    if (score > highScore) {
+        spanHighScore.textContent = score;
+        window.localStorage.setItem('highScore', score);
+    }
+    
 }
 
 function generateFood() {
-    var posFoodX = randint(0, mapList[0].length-1);
-    var posFoodY = randint(0, mapList.length-1);
+    if (mapList.length*mapList[0].length > snake.length+foodNumber) {
+        var posFoodX = randint(0, mapList[0].length-1);
+        var posFoodY = randint(0, mapList.length-1);
 
-    while (mapList[posFoodY][posFoodX]){
-        posFoodX = randint(0, mapList[0].length-1);
-        posFoodY = randint(0, mapList.length-1);
+        while (mapList[posFoodY][posFoodX]){
+            posFoodX = randint(0, mapList[0].length-1);
+            posFoodY = randint(0, mapList.length-1);
+        }
+
+        mapList[posFoodY][posFoodX] = "FOOD";
     }
-
-    mapList[posFoodY][posFoodX] = "FOOD";
 }
 
 function step() {
@@ -182,7 +214,6 @@ function step() {
     console.log("Fin d'un step");
 }
 
-
 function playGame(mapTemplate) {
     console.log("Début de l'initialisation de la partie.");
 
@@ -203,7 +234,7 @@ function playGame(mapTemplate) {
     mapList[snake[0][1]][snake[0][0]] = 'HEAD';
 
     // Définition du nombre de nouriture et affichage initiale
-    var foodNumber = mapTemplate["foodNumber"];
+    foodNumber = mapTemplate["foodNumber"];
     for (var i=0; i<foodNumber; i++) {
         generateFood();
     }
@@ -219,14 +250,20 @@ function playGame(mapTemplate) {
     step();
 }
 
+function showMenu() {
+
+}
+
+function maskMenu() {
+    
+}
+
 
 
 /* ################# PROGRAMME PRINCIPAL ################# */
 document.onkeydown = keyMooves;
+main();
 
 function main() {
-    console.log("Ca marche");
     playGame(defaultMap);
 }
-
-main();
