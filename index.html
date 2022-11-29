@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="clBgM clFgS">
         <div id="logoGame">
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500.000000 500.000000"
                 preserveAspectRatio="xMidYMid meet">
@@ -18,6 +18,13 @@
                 </g>
             </svg>
         </div>
+        <div class="score">
+            <p>Score : <span id="score">?</span></p>
+            <p>Meilleur score : <span id="highScore">?</span></p>
+        </div>
+    </header>
+
+    <div id="dialogMenu">
         <div id="themeMap">
             <span>Thème</span>
             <select id="selectMapTheme">
@@ -35,29 +42,14 @@
                 <option>Hardcore</option>
             </select>
         </div>
-        <button id="buttonFullScreen">Plein Ecran</button>
-    </header>
-    <div id="dialogMenu">
     </div>
-    <div id="mapSection">
+
+    <div id="mapSection" class="clBgS">
         <canvas id="snakeMap">
-            <img id="snakeHead"
-                src="./assets/images/snakeHead.png"
-                style="display: none ;">
-                
-            <img id="apple"
-                src="./assets/images/apple.png"
-                style="display: none ;">
+            <img id="snakeHead" src="./assets/images/snakeHead.png" style="display: none ;">
+            <img id="apple" src="./assets/images/apple.png" style="display: none ;">
         </canvas>
     </div>
-    <footer>
-        <div id="snakeSize">
-            <span>Taille du Serpent : </span>
-        </div>
-        <div id="highScore">
-            <span>Hightscore : </span>
-        </div>
-    </footer>
     <script src="./scripts/main.js"></script>
 </body>
 
