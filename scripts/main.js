@@ -92,14 +92,14 @@ function draw() {
                 ctxMap.fillStyle = '#819e29';
                 ctxMap.fillRect(j*squareWidth, i*squareWidth, squareWidth, squareWidth);
             } else if (mapList[i][j] == 'HEAD') {
-                ctxMap.fillStyle = '#819e29';
-                ctxMap.fillRect(j*squareWidth, i*squareWidth, squareWidth, squareWidth);
+                //ctxMap.fillStyle = '#819e29';
+                //ctxMap.fillRect(j*squareWidth, i*squareWidth, squareWidth , squareWidth);
 
                 // Affichage de la tête en fonction de la direction.
                 if (snakeDirection) {
                     imgHeadSnake.src = "./assets/images/snake_" + snakeDirection + ".png";
                 } else {
-                    imgHeadSnake.src = "./assets/images/snake_UP.png";
+                    imgHeadSnake.src = "./assets/images/snake_DOWN.png";
                 }
                 ctxMap.drawImage(imgHeadSnake, j*squareWidth, i*squareWidth, squareWidth, squareWidth);
             } else if (mapList[i][j] == 'FOOD') {
@@ -163,15 +163,15 @@ function step() {
             newHeadPosition = [oldHeadPosition[0]+1, oldHeadPosition[1]];
         }
 
-        // on transforme l'ancienne position de la tête en corp
+        // on transforme l'ancienne position de la tête en corps
         mapList[oldHeadPosition[1]][oldHeadPosition[0]] = "SNAKE";
 
 
         // Verification que la position de la tête est valide
         if (newHeadPosition[0] < 0 || newHeadPosition[0] >= mapList[0].length ||    // S'il est en dehors de la map d'un point de vu vertical
             newHeadPosition[1] < 0 || newHeadPosition[1] >= mapList.length ||       // S'il est en dehors de la map d'un point de vu horizontal
-            mapList[newHeadPosition[1]][newHeadPosition[0]] == "SNAKE" ||           // S'il se mort la queu
-            mapList[newHeadPosition[1]][newHeadPosition[0]] == "WALL" ) {           // S'il se prends un mure
+            mapList[newHeadPosition[1]][newHeadPosition[0]] == "SNAKE" ||           // S'il se mort la queue
+            mapList[newHeadPosition[1]][newHeadPosition[0]] == "WALL" ) {           // S'il se prends un mur
             
             // Alors la partie est finie
             gameOver = true;
