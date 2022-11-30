@@ -11,6 +11,14 @@ html, body {
     height: 100vh;
 }
 
+html { 
+    background: url(../images/background.jpeg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
 title {
     display: none;
 }
@@ -20,26 +28,6 @@ h1 {
     font-size: 3rem;
 }
 
-
-
-/* ======================== COULEURS ======================== */
-.clFgM {
-    color: #999;
-    fill: #999;
-}
-
-.clFgS {
-    color: #333;
-    fill: #333;
-}
-
-.clBgM {
-    background-color: #999;
-}
-
-.clBgS {
-    background-color: #333;
-}
 
 
 /* ======================== HEADER ======================== */
@@ -56,6 +44,15 @@ header {
     font-size: 1.5rem;
     font-family: roboto;
     font-weight: 700;
+
+    color: #DDD;
+    fill: #DDD;
+
+    background: rgba( 255, 255, 255, 0.2 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 10px );
+    -webkit-backdrop-filter: blur( 10px );
+    border-bottom: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 header svg {
@@ -113,6 +110,13 @@ header svg {
 
     border-radius: 4vh;
     padding: 5vh 5vw;
+
+    background: rgba( 255, 255, 255, 0.5 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 10px );
+    -webkit-backdrop-filter: blur( 10px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 #dialogMenu div {
@@ -136,10 +140,19 @@ header svg {
     border-radius: 200px;
     min-width: 25vw;
     text-align: center;
-    border: solid 1.5px black;
+    border: solid 2px black;
     background-color: transparent;
 }
 
 .mask {
     display: none;
+}
+
+canvas {
+    background: rgba( 255, 255, 255, 0.85 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 10px );
+    -webkit-backdrop-filter: blur( 10px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }

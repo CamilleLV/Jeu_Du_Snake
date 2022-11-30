@@ -82,8 +82,8 @@ function draw() {
     cnvMap.width = nbColonne * squareWidth;
     cnvMap.height = nbLigne * squareWidth;
 
-    ctxMap.fillStyle = 'grey';
-    ctxMap.fillRect(0, 0, nbColonne * squareWidth, nbLigne * squareWidth);
+    //ctxMap.fillStyle = 'grey';
+    //ctxMap.fillRect(0, 0, nbColonne * squareWidth, nbLigne * squareWidth);
 
     for (var i=0; i<nbLigne; i++) {
         for (var j=0; j<nbColonne; j++) {
@@ -176,6 +176,7 @@ function step() {
             // Alors la partie est finie
             gameOver = true;
             divMenu.style.display = "flex";
+            cnvMap.style.display = "none";
         // Sinon si le snake a mangé de la nourriture
         } else if (mapList[newHeadPosition[1]][newHeadPosition[0]] == "FOOD") {
             // Ajout du score
@@ -254,6 +255,7 @@ function playGame(mapTemplate) {
 
 function playGameButton() {
     divMenu.style.display = "none";
+    cnvMap.style.display = "block";
     defineGamemode()
     
     fetch("./assets/maps/map" + randint(1, mapNumber) + ".json")
@@ -309,4 +311,5 @@ main();
 
 function main() {
     divMenu.style.display = "flex";
+    cnvMap.style.display = "none";
 }
