@@ -25,13 +25,9 @@
     </header>
 
     <div id="dialogMenu">
-        <div id="themeMap">
-            <span>Thème</span>
-            <select id="selectMapTheme">
-                <option>Noir et Blanc</option>
-                <option>Futuriste</option>
-                <option>Rétro</option>
-            </select>
+        <h1>Snake game 🐍</h1>
+        <div>
+            <span>Bienvenu sur ce jeu Snake !</span>
         </div>
         <div id="gameMode">
             <span>Mode de Jeu</span>
@@ -42,11 +38,12 @@
                 <option>Hardcore</option>
             </select>
         </div>
+        <button onclick="playGameButton()">Lancer une partie</button>
     </div>
 
     <div id="mapSection" class="clBgS">
         <canvas id="snakeMap">
-            <img id="snakeHead" src="./assets/images/snakeHead.png" style="display: none ;">
+            <img id="snakeHead" src="./assets/images/snake_UP.png" style="display: none ;">
             <img id="apple" src="./assets/images/apple.png" style="display: none ;">
         </canvas>
     </div>

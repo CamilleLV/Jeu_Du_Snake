@@ -5,8 +5,6 @@ const cnvMap = document.getElementById("snakeMap");
 const ctxMap = cnvMap.getContext("2d");
 const defaultMap = {
     "dimensions": [30, 15],
-    "delay": 200,
-    "foodNumber": 5,
     "snake": [
         [15,5],
         [15,6],
@@ -17,6 +15,8 @@ const foodLenghAdd = 3;
 const divParentCnv = document.getElementById("mapSection");
 const spanScore = document.getElementById("score");
 const spanHighScore = document.getElementById("highScore");
+const divMenu = document.getElementById("dialogMenu");
+const mapNumber = 2;
 
 
 
@@ -89,22 +89,24 @@ function draw() {
         for (var j=0; j<nbColonne; j++) {
 
             if (mapList[i][j] == 'SNAKE') {
-                ctxMap.fillStyle = 'pink';
+                ctxMap.fillStyle = '#819e29';
                 ctxMap.fillRect(j*squareWidth, i*squareWidth, squareWidth, squareWidth);
-            }
-            if (mapList[i][j] == 'HEAD') {
-                ctxMap.fillStyle = 'purple';
+            } else if (mapList[i][j] == 'HEAD') {
+                ctxMap.fillStyle = '#819e29';
                 ctxMap.fillRect(j*squareWidth, i*squareWidth, squareWidth, squareWidth);
 
+                // Affichage de la tête en fonction de la direction.
+                if (snakeDirection) {
+                    imgHeadSnake.src = "./assets/images/snake_" + snakeDirection + ".png";
+                } else {
+                    imgHeadSnake.src = "./assets/images/snake_UP.png";
+                }
                 ctxMap.drawImage(imgHeadSnake, j*squareWidth, i*squareWidth, squareWidth, squareWidth);
-            }
-            if (mapList[i][j] == 'FOOD') {
+            } else if (mapList[i][j] == 'FOOD') {
                 console.log(i, j, "FOOD");
                 ctxMap.fillStyle = 'red';
-                //ctxMap.fillRect(j*squareWidth, i*squareWidth, squareWidth, squareWidth);
                 
                 ctxMap.drawImage(imgFood, j*squareWidth, i*squareWidth, squareWidth, squareWidth);
-
             }
         }
     }
@@ -173,6 +175,7 @@ function step() {
             
             // Alors la partie est finie
             gameOver = true;
+            divMenu.style.display = "flex";
         // Sinon si le snake a mangé de la nourriture
         } else if (mapList[newHeadPosition[1]][newHeadPosition[0]] == "FOOD") {
             // Ajout du score
@@ -226,7 +229,7 @@ function playGame(mapTemplate) {
     }
 
     // Définition du snake et affichage initiale
-    snake = mapTemplate["snake"];
+    snake = JSON.parse(JSON.stringify(mapTemplate["snake"]));
     snakeDirection = null;
     snake.forEach(position => {
         mapList[position[1]][position[0]] = 'SNAKE';
@@ -234,7 +237,6 @@ function playGame(mapTemplate) {
     mapList[snake[0][1]][snake[0][0]] = 'HEAD';
 
     // Définition du nombre de nouriture et affichage initiale
-    foodNumber = mapTemplate["foodNumber"];
     for (var i=0; i<foodNumber; i++) {
         generateFood();
     }
@@ -250,20 +252,61 @@ function playGame(mapTemplate) {
     step();
 }
 
-function showMenu() {
-
-}
-
-function maskMenu() {
+function playGameButton() {
+    divMenu.style.display = "none";
+    defineGamemode()
+    
+    fetch("./assets/maps/map" + randint(1, mapNumber) + ".json")
+        .then(function(response) {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw ("Error " + response.status);
+            }
+        })
+        .then(function(data) {
+            console.log(data);
+            playGame(data);
+        })
+        .catch(function(err) {
+            console.log(err);
+            playGame(defaultMap);
+        });
     
 }
 
+function defineGamemode() {
+    var gamemode = document.getElementById("selectMode").value;
+
+    switch (gamemode) {
+        case "Facile":
+            stepTime = 500;
+            foodNumber = 5;
+            break;
+        case "Moyen":
+            stepTime = 400;
+            foodNumber = 3;
+            break;
+        case "Difficile":
+            stepTime = 250;
+            foodNumber = 1;
+            break;
+        case "Hardcore":
+            stepTime = 100;
+            foodNumber = 1;
+            break;
+        default:
+            stepTime = 400;
+            foodNumber = 3;
+            break;
+    }
+}
 
 
 /* ################# PROGRAMME PRINCIPAL ################# */
-document.onkeydown = keyMooves;
+document.addEventListener("keydown", keyMooves);
 main();
 
 function main() {
-    playGame(defaultMap);
+    divMenu.style.display = "flex";
 }
